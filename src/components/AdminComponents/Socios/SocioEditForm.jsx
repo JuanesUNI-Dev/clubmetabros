@@ -27,11 +27,11 @@ export default function SocioEditForm({ socio, onBack, onUpdate }) {
 
   try {
     const payload = {
-      v_id_partner: socio.id_partner,
-      v_name: form.name,
-      v_email: form.email,
-      v_phone_number: form.phone_number,
-      v_cedula: form.cedula,
+      id: socio.id_partner,
+      name: form.name,
+      email: form.email,
+      phoneNumber: form.phone_number,
+      cedula: form.cedula,
     };
 
     const res = await updatePartner(payload);
