@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "http://localhost:3002/log/reserve"; // backend
+const BASE_URL = "https://backdemet.bskcfv.online/log/reserve"; // backend
 
 export async function getLogs() {
   try {

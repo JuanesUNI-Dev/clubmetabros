@@ -19,7 +19,7 @@ export async function proxy(req) {
 
   // --- CASE 2: NO access pero SÍ refresh → intentar regenerar ---
   if ((!access && refresh) || ((isAdmin || isAdminAsistente) && refresh)) {
-    const refreshURL = new URL("http://localhost:3002/intern/refresh");
+    const refreshURL = new URL("https://backdemet.bskcfv.online/intern/refresh");
 
     const res = await fetch(refreshURL, {
       method: "GET",

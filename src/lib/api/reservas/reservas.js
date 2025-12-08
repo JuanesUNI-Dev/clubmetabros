@@ -1,7 +1,7 @@
 // src/lib/api/reservas/reservas.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "http://localhost:3002/reserve"; // backend
+const BASE_URL = "https://backdemet.bskcfv.online/reserve"; // backend
 
 // =============================
 // GET: Obtener todas las reservas

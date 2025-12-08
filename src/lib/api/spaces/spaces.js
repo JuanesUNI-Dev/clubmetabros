@@ -1,7 +1,7 @@
 import { apiClient } from "@/lib/ApiClient";
 
 // src/lib/api/spaces/spaces.js
-const BASE_URL = "http://localhost:3002/space";
+const BASE_URL = "https://backdemet.bskcfv.online/space";
 
 // GET ALL
 export async function getSpaces() {

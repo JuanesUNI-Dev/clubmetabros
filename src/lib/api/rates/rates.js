@@ -1,7 +1,7 @@
 // src/lib/api/rates/rates.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "http://localhost:3002/rate"; // ruta base del backend
+const BASE_URL = "https://backdemet.bskcfv.online/rate"; // ruta base del backend
 
 // -------------------------------------------
 // GET ALL RATES

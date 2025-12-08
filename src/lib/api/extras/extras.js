@@ -1,7 +1,7 @@
 // src/lib/api/extra/extra.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "http://localhost:3002/extra"; // backend extras
+const BASE_URL = "https://backdemet.bskcfv.online/extra"; // backend extras
 
 // ---------------------------------------------------------------------
 // GET — Obtener todos los extras
