@@ -1,7 +1,7 @@
 // src/lib/api/solicitudes/solicitudes.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backend-demet.onrender.com/request"; // tu backend
+const BASE_URL = "https://express-orcin-three.vercel.app/request"; // tu backend
 
 export async function getSolicitudes() {
   try {

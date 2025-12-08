@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backend-demet.onrender.com/log/reserve"; // backend
+const BASE_URL = "https://express-orcin-three.vercel.app/log/reserve"; // backend
 
 export async function getLogs() {
   try {

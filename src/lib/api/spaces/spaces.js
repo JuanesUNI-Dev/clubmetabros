@@ -1,7 +1,7 @@
 import { apiClient } from "@/lib/ApiClient";
 
 // src/lib/api/spaces/spaces.js
-const BASE_URL = "https://backend-demet.onrender.com/space";
+const BASE_URL = "https://express-orcin-three.vercel.app/space";
 
 // GET ALL
 export async function getSpaces() {

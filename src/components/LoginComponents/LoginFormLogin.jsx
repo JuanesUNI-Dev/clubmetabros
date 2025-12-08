@@ -19,29 +19,10 @@ export default function LoginForm({ toggleMode }) {
 
     if (!ok) {
       setError(data.message);
-      alert("Error de Credenciales, verifique sus Datos Nuevamente")
       return;
     }
 
-    const res = await fetch("https://backend-demet.onrender.com/intern/me", {
-      method: "GET",
-      credentials: "include",
-    });
-
-    const dataRol = await res.json();
-
-    if (dataRol.role == "Administrador") {
-      router.push("/admin");
-    } else if (dataRol.role == "Asistente de Gerencia") {
-      router.push("/adminAsistente");
-    }
-
-    if (res.status === 401 ||
-      (dataRol.role !== "Administrador" && dataRol.role !== "Asistente de Gerencia")
-    ) {
-      return router.push("/");
-    }
-
+    router.push("/admin");
   };
 
   return (

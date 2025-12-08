@@ -1,7 +1,7 @@
 // src/lib/api/rates/rates.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backend-demet.onrender.com/rate"; // ruta base del backend
+const BASE_URL = "https://express-orcin-three.vercel.app/rate"; // ruta base del backend
 
 // -------------------------------------------
 // GET ALL RATES

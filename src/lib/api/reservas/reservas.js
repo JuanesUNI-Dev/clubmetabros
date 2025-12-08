@@ -1,7 +1,7 @@
 // src/lib/api/reservas/reservas.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backend-demet.onrender.com/reserve"; // backend
+const BASE_URL = "https://express-orcin-three.vercel.app/reserve"; // backend
 
 // =============================
 // GET: Obtener todas las reservas

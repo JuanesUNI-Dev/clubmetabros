@@ -9,7 +9,7 @@ export async function apiClient(url, options = {}) {
   if (res.status === 401) {
     console.log("Access token expiró. Intentando refresh...");
 
-    const refreshRes = await fetch("https://backend-demet.onrender.com/intern/refresh", {
+    const refreshRes = await fetch("https://express-orcin-three.vercel.app/intern/refresh", {
       method: "GET",
       credentials: "include",
     });
