@@ -1,7 +1,7 @@
 // src/lib/api/reports/reports.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backdemet.bskcfv.online/report"; // Ajusta si usas env
+const BASE_URL = "https://backend-demet.onrender.com/report"; // Ajusta si usas env
 
 /**
  * Descargar reporte en formato Excel

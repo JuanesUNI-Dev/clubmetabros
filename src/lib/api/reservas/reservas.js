@@ -1,7 +1,7 @@
 // src/lib/api/reservas/reservas.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backdemet.bskcfv.online/reserve"; // backend
+const BASE_URL = "https://backend-demet.onrender.com/reserve"; // backend
 
 // =============================
 // GET: Obtener todas las reservas

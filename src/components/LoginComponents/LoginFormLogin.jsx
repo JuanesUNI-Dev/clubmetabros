@@ -23,7 +23,7 @@ export default function LoginForm({ toggleMode }) {
       return;
     }
 
-    const res = await fetch("https://backdemet.bskcfv.online/intern/me", {
+    const res = await fetch("https://backend-demet.onrender.com/intern/me", {
       method: "GET",
       credentials: "include",
     });

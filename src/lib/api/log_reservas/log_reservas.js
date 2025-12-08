@@ -1,6 +1,6 @@
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backdemet.bskcfv.online/log/reserve"; // backend
+const BASE_URL = "https://backend-demet.onrender.com/log/reserve"; // backend
 
 export async function getLogs() {
   try {

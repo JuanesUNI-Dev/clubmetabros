@@ -1,7 +1,7 @@
 // src/lib/api/Auth/users.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backdemet.bskcfv.online/intern";
+const BASE_URL = "https://backend-demet.onrender.com/intern";
 
 /* ---------------------------------------------------
    Helper para manejar respuestas del backend

@@ -1,7 +1,7 @@
 // src/lib/api/partner/partner.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backdemet.bskcfv.online/partner"; // backend partners
+const BASE_URL = "https://backend-demet.onrender.com/partner"; // backend partners
 
 // ---------------------------------------------------------------------
 // GET — Obtener todos los socios

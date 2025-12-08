@@ -1,7 +1,7 @@
 // src/lib/api/solicitudes/solicitudes.js
 import { apiClient } from "@/lib/ApiClient";
 
-const BASE_URL = "https://backdemet.bskcfv.online/request"; // tu backend
+const BASE_URL = "https://backend-demet.onrender.com/request"; // tu backend
 
 export async function getSolicitudes() {
   try {
