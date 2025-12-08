@@ -237,7 +237,7 @@ export default function LandingPage() {
             <div className="text-center mb-16">
                 <h2 className="text-4xl font-extrabold text-[rgb(25,50,90)] mb-4">Espacios Empresariales y Deportivos</h2>
                 <p className="text-xl text-[rgb(25,50,90)] opacity-70 max-w-3xl mx-auto">
-                    Explora nuestra oferta completa de salones tipos de organizaciones para diferentes tipos de eventos. Haz clic para ver detalles y reservar.
+                    Explora nuestra oferta completa de salones y tipos de organizaciones para diferentes tipos de eventos. Haz clic para ver detalles y reservar.
                 </p>
             </div>
             {/* Grid con 1 columna en móvil, 2 en tablet y 3 en desktop */}

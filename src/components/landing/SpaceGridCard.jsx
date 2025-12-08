@@ -24,7 +24,7 @@ export const SpaceGridCard = ({ space, onOpenModal }) => {
           }}
         />
         <span className="absolute top-3 left-3 text-xs font-semibold px-3 py-1 rounded-full bg-[rgb(173,216,230)] text-[rgb(25,50,90)] shadow-md">
-          {space.tipo}
+          Descuento para socios
         </span>
       </div>
 

@@ -188,33 +188,128 @@ export default function ReservationModal({ space, isOpen, onClose }) {
 
         {/* PASO 3 */}
         {step === 3 && (
-          <div className="space-y-4">
-            <h3 className="font-semibold text-lg">Datos del evento</h3>
-            <div className="space-y-2">
-              <input name="v_tittle" placeholder="Título del evento" className="w-full border p-2 rounded" value={form.v_tittle} onChange={handleChange} />
-              <textarea name="v_description" placeholder="Descripción" className="w-full border p-2 rounded" value={form.v_description} onChange={handleChange} />
-              <input name="v_name" placeholder="Nombre" className="w-full border p-2 rounded" value={form.v_name} onChange={handleChange} />
-              <input type="email" name="v_email" placeholder="Email" className="w-full border p-2 rounded" value={form?.v_email || ""} onChange={handleChange} />
-              <input type="tel" name="v_phone_number" placeholder="Teléfono" className="w-full border p-2 rounded" value={form.v_phone_number} onChange={handleChange} />
-              <input type="number" name="v_pax" placeholder="Personas" className="w-full border p-2 rounded" value={form.v_pax} onChange={handleChange} />
+          <form
+            className="space-y-4"
+            onSubmit={(e) => {
+              e.preventDefault();
 
-              {/* TARIFAS FILTRADAS */}
+              // Verifica si el formulario actual es válido
+              const isValid = e.target.checkValidity();
+
+              if (!isValid) {
+                // Fuerza al navegador a mostrar mensajes nativos
+                e.target.reportValidity();
+                return;
+              }
+
+              // Si pasa todas las validaciones → avanzar
+              setStep(4);
+            }}
+          >
+            <h3 className="font-semibold text-lg">Datos del evento</h3>
+
+            <div className="space-y-2">
+
+              <input
+                maxLength={10}
+                required
+                name="v_tittle"
+                placeholder="Título del evento"
+                className="w-full border p-2 rounded"
+                value={form.v_tittle}
+                onChange={handleChange}
+              />
+
+              <textarea
+                maxLength={500}
+                required
+                name="v_description"
+                placeholder="Descripción"
+                className="w-full border p-2 rounded"
+                value={form.v_description}
+                onChange={handleChange}
+              />
+
+              <input
+                maxLength={20}
+                required
+                name="v_name"
+                placeholder="Nombre"
+                className="w-full border p-2 rounded"
+                value={form.v_name}
+                onChange={handleChange}
+              />
+
+              <input
+                type="email"
+                required
+                name="v_email"
+                placeholder="Email"
+                className="w-full border p-2 rounded"
+                value={form?.v_email || ""}
+                onChange={handleChange}
+              />
+
+              <input
+                type="tel"
+                required
+                name="v_phone_number"
+                placeholder="Teléfono"
+                className="w-full border p-2 rounded"
+                value={form.v_phone_number}
+                onChange={handleChange}
+              />
+
+              <input
+                type="number"
+                required
+                name="v_pax"
+                placeholder="Personas"
+                className="w-full border p-2 rounded"
+                value={form.v_pax}
+                onChange={handleChange}
+              />
+
               {tarifasFiltradas.length > 0 && (
                 <div>
                   <label className="block font-semibold mb-1">Tarifas disponibles:</label>
-                  <select name="v_fk_rate" value={form.v_fk_rate || ""} onChange={handleChange} className="w-full border p-2 rounded">
+                  <select
+                    name="v_fk_rate"
+                    required
+                    value={form.v_fk_rate || ""}
+                    onChange={handleChange}
+                    className="w-full border p-2 rounded"
+                  >
+                    <option value="">Seleccione una tarifa</option>
                     {tarifasFiltradas.map(rate => (
-                      <option key={rate.id_rate} value={rate.id_rate}>{rate.tarifa} — {rate.value_4_hours} (4h) / {rate.value_8_hours} (8h)</option>
+                      <option key={rate.id_rate} value={rate.id_rate}>
+                        {rate.tarifa} — {rate.value_4_hours} (4h) / {rate.value_8_hours} (8h)
+                      </option>
                     ))}
                   </select>
                 </div>
               )}
+
             </div>
+
             <div className="flex justify-between">
-              <button onClick={() => setStep(2)} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Atrás</button>
-              <button onClick={() => setStep(4)} className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Siguiente</button>
+              <button
+                type="button"
+                onClick={() => setStep(2)}
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+              >
+                Atrás
+              </button>
+
+              {/* BOTÓN SUBMIT para que active las validaciones */}
+              <button
+                type="submit"
+                className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+              >
+                Siguiente
+              </button>
             </div>
-          </div>
+          </form>
         )}
 
         {/* PASO 4 */}
