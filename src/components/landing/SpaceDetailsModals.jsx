@@ -53,7 +53,7 @@ const SpaceDetailsModal = ({ space, onClose, onBook }) => {
               {/* Ubicación no existe aún */}
               <span className="text-lg font-medium flex items-center">
                 <MapPin size={18} className="mr-2 text-[rgb(173,216,230)]" />
-                {"Ubicación no disponible"}
+                {"Sede Principal, Villavicencio"}
               </span>
             </div>
           </div>
@@ -95,13 +95,28 @@ const SpaceDetailsModal = ({ space, onClose, onBook }) => {
                 const min4 = Math.min(...valores4);
                 const max4 = Math.max(...valores4);
 
+                const valores8 = space.tarifas.map(t => Number(t.value_8_hours));
+                const min8 = Math.min(...valores8);
+                const max8 = Math.max(...valores8);
+
+                const textoMin4 = min4 === 0 ? "CORTESIA" : `$${min4.toLocaleString()} COP`;
+                const textoMax4 = `$${max4.toLocaleString()} COP`;
+
+
                 return (
                   <>
                     <h4 className="mt-4 text-xl font-semibold text-[rgb(25,50,90)] mb-3">
                       Rango de Precios (4h)
                     </h4>
                     <h4 className="text-lg text-[rgb(25,50,90)] text-opacity-90">
-                      Mínimo: ${min4.toLocaleString()} COP | Máximo: ${max4.toLocaleString()} COP
+                      Socios: {textoMin4} | No socios: {textoMax4}
+                    </h4>
+
+                    <h4 className="mt-4 text-xl font-semibold text-[rgb(25,50,90)] mb-3">
+                      Rango de Precios (8h)
+                    </h4>
+                    <h4 className="text-lg text-[rgb(25,50,90)] text-opacity-90">
+                      Socios: ${min8.toLocaleString()} COP | No socios: ${max8.toLocaleString()} COP
                     </h4>
                   </>
                 );
