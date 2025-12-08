@@ -19,16 +19,14 @@ export default function Login2({ isRegister, toggleMode }) {
         />
         <div></div>
         <h2 className="mt-3 font-bold font-anton text-2xl">
-          {isRegister ? "Registrarse" : "Iniciar sesión"}
+          {isRegister ? "Iniciar sesión" : "Iniciar sesión"}
         </h2>
       </div>
 
       {/* Aquí es donde cambia todo */}
-      {isRegister ? (
-        <RegisterForm toggleMode={toggleMode} />
-      ) : (
+      {
         <LoginForm toggleMode={toggleMode} />
-      )}
+      }
 
     </div>
   );
