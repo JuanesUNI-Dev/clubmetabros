@@ -126,7 +126,7 @@ const SpaceDetailsModal = ({ space, onClose, onBook }) => {
                   Horario
                 </h4>
                 <p className="text-[rgb(25,50,90)] text-opacity-80">
-                  {"Horario no disponible"}
+                  {"8:00 AM - 22:00"}
                 </p>
               </div>
 
