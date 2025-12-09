@@ -26,7 +26,6 @@ export default function ListaReservaEnPros({ reload, onSelect }) {
 
   // FILTRO DE SOCIO / NO SOCIO
   const filteredProcesos = reservasEnPros.filter((e) => {
-    console.log(e)
     if (filterPartnerReservaEnPros === "partner") return e.is_partner === true;
     if (filterPartnerReservaEnPros === "non-partner") return e.is_partner === false;
     return true;
