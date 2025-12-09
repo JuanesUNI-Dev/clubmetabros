@@ -43,33 +43,6 @@ const filteredProcesos = reservasEnPros.filter((e) => {
         <h2 className="flex text-lg font-semibold text-gray-700">Solicitudes de Reservas en Progreso</h2>
         <h1 className="flex text-lg font-semibold text-gray-700">NUMERO EN PROGRESO: <span className="text-amber-500 text-5xl"> {filteredProcesos.filter((e) => e.status === "EN PROGRESO").length}</span></h1>
       </div>
-      <div className="flex items-center gap-2 mb-2">
-        <span className="text-sm text-gray-600 font-semibold">Filtrar:</span>
-
-        <button
-          onClick={() => setfilterPartnerReservaEnPros("all")}
-          className={`px-2 py-1 text-xs rounded-lg border 
-            ${filterPartnerReservaEnPros === "all" ? "bg-amber-500 text-white" : "bg-white"}`}
-        >
-          Todos
-        </button>
-
-        <button
-          onClick={() => setfilterPartnerReservaEnPros("partner")}
-          className={`px-2 py-1 text-xs rounded-lg border 
-            ${filterPartnerReservaEnPros === "partner" ? "bg-amber-500 text-white" : "bg-white"}`}
-        >
-          Socios
-        </button>
-
-        <button
-          onClick={() => setfilterPartnerReservaEnPros("non-partner")}
-          className={`px-2 py-1 text-xs rounded-lg border 
-            ${filterPartnerReservaEnPros === "non-partner" ? "bg-amber-500 text-white" : "bg-white"}`}
-        >
-          No socios
-        </button>
-      </div>
 
       <div className="flex flex-col gap-3 overflow-y-auto pr-1 max-h-[85vh]">
         {filteredProcesos.filter((reservaEnPros) => reservaEnPros.status === "EN PROGRESO").map((reservaEnPros) => (
