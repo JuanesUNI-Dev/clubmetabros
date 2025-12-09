@@ -19,10 +19,29 @@ export default function LoginForm({ toggleMode }) {
 
     if (!ok) {
       setError(data.message);
+      alert("Error de Credenciales, verifique sus Datos Nuevamente")
       return;
     }
 
-    router.push("/admin");
+    const res = await fetch("https://express-orcin-three.vercel.app/intern/me", {
+      method: "GET",
+      credentials: "include",
+    });
+
+    const dataRol = await res.json();
+
+    if (dataRol.role == "Administrador") {
+      router.push("/admin");
+    } else if (dataRol.role == "Asistente de Gerencia") {
+      router.push("/adminAsistente");
+    }
+
+    if (res.status === 401 ||
+      (dataRol.role !== "Administrador" && dataRol.role !== "Asistente de Gerencia")
+    ) {
+      return router.push("/");
+    }
+
   };
 
   return (

@@ -34,7 +34,7 @@ export default function AdminLayout() {
   const [collapseDesktop, setCollapseDesktop] = useState(false);
 
   // 🔥 ESTADO MÁS IMPORTANTE: Qué sección está activa
-  const [activePage, setActivePage] = useState("dashboard");
+  const [activePage, setActivePage] = useState("solicitudes");
 
   const [selectedSolicitud, setSelectedSolicitud] = useState(null);
 
