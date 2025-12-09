@@ -70,12 +70,12 @@ export default function LoginForm({ toggleMode }) {
 
       <div className="login-register">
           <p className="flex gap-2 justify-center mt-2">
-            No tienes cuenta?
+            Menu en otro color :D
             <span className="register-link"> Haz Click Abajo :D </span>
           </p>
         </div>
         <button onClick={toggleMode} className="toggleBtn2 cursor-pointer mt-4">
-           ¡ No tengo cuenta !
+           ¡ Menu en otro color !
         </button>
     </form>
   );
