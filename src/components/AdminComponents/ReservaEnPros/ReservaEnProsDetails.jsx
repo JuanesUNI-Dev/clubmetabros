@@ -138,7 +138,6 @@ export default function ReservaEnProsDetails({ reservaEnPros, onBack, onUpdate }
         <p className="font-semibold">{reservaEnPros.name}</p>
         <p className="text-sm text-gray-500 mt-2">Correo: {reservaEnPros.email}</p>
         <p className="text-sm text-gray-500 mt-2">Teléfono: {reservaEnPros.phone_number}</p>
-        <p className="text-sm text-gray-500 mt-2">Tipo: {reservaEnPros.is_partner ? "Socio" : "No socio"}</p>
       </div>
 
       {/* TARIFA */}
