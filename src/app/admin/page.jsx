@@ -48,7 +48,7 @@ export default function AdminLayout() {
   const [collapseDesktop, setCollapseDesktop] = useState(false);
 
   // Qué sección se muestra primero
-  const [activePage, setActivePage] = useState("dashboard");
+  const [activePage, setActivePage] = useState("socios");
 
   // ESTADO DE ESPACIOS
   const [selectedEspacio, setSelectedEspacio] = useState(null);

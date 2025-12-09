@@ -82,7 +82,7 @@ export async function getMe() {
 export async function logout() {
   try {
     const res = await fetch(`${BASE_URL}/logout`, {
-      method: "GET",
+      method: "POST",
       credentials: "include",
     });
 
