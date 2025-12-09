@@ -1,47 +1,125 @@
 // src/app/admin/page.jsx
-
 'use client'
-
-// LIBRERIAS
-import { useState } from 'react'
+import { useState } from 'react';
 import { useRouter } from "next/navigation";
 
 // LOGOS DE SIDEBAR LUCIDE
 import { 
-  Menu, ChevronRight,  House,  BarChart3,  UserStar, LogOut , CalendarSearch , 
-  CalendarCheck2, LayoutDashboard, PanelLeftOpen, PanelLeftClose, CalendarCheck, 
+  Menu, ChevronRight, UserLock, House, BarChart3, HouseHeart, UserStar,Banana, LogOut , CalendarSearch , 
+  CalendarCheck2, LayoutDashboard, PanelLeftOpen, PanelLeftClose, CalendarCheck,  CalendarHeart
 } from "lucide-react";
 
 // COMPONENTE PRINCIPAL
-import {Wrapper4060} from "@/components/AdminComponents";
+import Wrapper4060 from "@/components/AdminComponents/Wrapper4060.jsx";
+
+// COMPONENTES DE ESPACIOS
+import { EspacioDetails, ListaEspacios, AñadirEspacios, EspaciosEditForm} from "@/components/AdminComponents";
 
 // COMPONENTES DE SOLICITUDES
 import { SolicitudesDetails, ListaSolicitudes } from "@/components/AdminComponents";
 
-// COMPONENTES DE RESERVAS
-import { ReservasDetalles, ListaReservas } from "@/components/AdminComponents";
-
 // COMPONENTES DE PROCESOS
 import { ProcesosDetails, ListaProcesos } from "@/components/AdminComponents";
+
+// COMPONENTES DE RESERVAS EN PROGRESO
+import { ReservaEnProsDetails, ListaReservaEnPros } from "@/components/AdminComponents";
+
+// COMPONENTES DE RESERVAS
+import { ReservasDetalles, ListaReservas } from "@/components/AdminComponents";
 
 // COMPONENTES VARIOS
 import ReportesPage from '@/components/AdminComponents/ReportsPage';
 import {logout} from '@/lib/api/Auth/users.js';
 
+// COMPONENTES DE USUARIOS
+import { EmpleadoDetails, ListaEmpleados, AñadirEmpleado } from "@/components/AdminComponents";
 
+// COMPONENTES DE SOCIOS
+import { SociosDetails, ListaSocios, AñadirSocioForm} from "@/components/AdminComponents";
+
+// COMPONENTES DE EXTRAS
+import { ListaExtras, ExtrasDetails, AñadirExtraForm, ExtrasEditForm} from "@/components/AdminComponents";
+
+
+
+// COMPONENTE PRINCIPAL
 export default function AdminLayout() {
   const [openMobile, setOpenMobile] = useState(false);
   const [collapseDesktop, setCollapseDesktop] = useState(false);
 
-  // 🔥 ESTADO MÁS IMPORTANTE: Qué sección está activa
-  const [activePage, setActivePage] = useState("solicitudes");
+  // Qué sección se muestra primero
+  const [activePage, setActivePage] = useState("socios");
 
+  // ESTADO DE ESPACIOS
+  const [selectedEspacio, setSelectedEspacio] = useState(null);
+  const [reloadEspacios, setReloadEspacios] = useState(false);
+
+  // CONSTANTES PARA SOLICITUDES ⚡
   const [selectedSolicitud, setSelectedSolicitud] = useState(null);
+  const [reloadSolicitudes, setReloadSolicitudes] = useState(false);
 
+  // ESTADO DE PROCESOS
   const [selectedProceso, setSelectedProceso] = useState(null);
+  const [reloadProcesos, setReloadProcesos] = useState(false);
 
+  // ESTADO DE RESERVAS EN PROGRESO
+  const [selectedReservaEnPros, setSelectedReservaEnPros] = useState(null);
+  const [reloadReservaEnPros, setReloadReservaEnPros] = useState(false);
+
+  // ESTADO DE RESERVAS
   const [selectedReserva, setSelectedReserva] = useState(null);
 
+  // ESTADO DE USUARIOS
+  const [selectedInterno, setSelectedInterno] = useState(null);
+
+  // ESTADO DE SOCIOS
+  const [selectedSocio, setSelectedSocio] = useState(null);
+  const [reloadSocios, setReloadSocios] = useState(false);
+
+  // ESTADO DE EXTRAS
+  const [selectedExtra, setSelectedExtra] = useState(null);
+  const [reloadExtras, setReloadExtras] = useState(false);
+
+
+  // FUNCIONES DE ESPACIOS 
+const refreshEspacios = () => {
+    setReloadEspacios(prev => !prev); // cambia de true a false y fuerza el refetch
+    setSelectedEspacio(null); // limpia el detalle
+};
+
+  // FUNCIONES DE SOLICITUDES
+  const refreshSolicitudes = () => {
+    setReloadSolicitudes(prev => !prev); // cambia de true a false y fuerza el refetch
+    setSelectedSolicitud(null); // limpia el detalle
+};
+
+// FUNCIONES DE RESERVAS EN PROGRESO
+  const refreshReservaEnPros = () => {
+    setReloadReservaEnPros(prev => !prev); // cambia de true a false y fuerza el refetch
+    setSelectedReservaEnPros(null); // limpia el detalle
+};
+
+  // FUNCIONES DE RESERVAS
+  const refreshProcesos = () => {
+    setReloadProcesos(prev => !prev); // cambia de true a false y fuerza el refetch
+    setSelectedProceso(null); // limpia el detalle
+};
+
+// FUNCIONES DE SOCIOS
+  const refreshSocios = () => {
+    setReloadSocios(prev => !prev);  // fuerza reload
+    setSelectedSocio(null);             // opcional
+
+};
+
+  const refreshExtras = () => {
+    setReloadExtras(prev => !prev);  // fuerza reload
+    setSelectedExtra(null);             // opcional
+  
+};
+
+
+// FUNCION DE LOGOUT
   const router = useRouter();
   async function handleLogout() {
     const res = await logout();
@@ -53,26 +131,25 @@ export default function AdminLayout() {
       alert("Error al cerrar sesión: " + res.data.message);
     }
   }
-
-
-
   
+  // ICONOS DE NAVEGACIÓN
 
   // Para detalles en móvil
   const [showDetailMobile, setShowDetailMobile] = useState(false);
 
   const links = [
     { name: "Dashboard", icon: LayoutDashboard, id: "dashboard" }, // Quiero mostrar algunas estadisticas aqui, Puede ser reservas del mes por ejemplo
-    
-    { name: "Solicitudes de Reservas", icon: CalendarSearch, id: "solicitudes" },
-    { name: "Solicitudes En Progreso", icon: CalendarCheck2, id: "proceso" },
-    { name: "Reservas Finalizadas/Pagas", icon: CalendarCheck, id: "reservas" },
+    { name: "Solicitudes de Reservas", icon: CalendarSearch, id: "solicitudes" }, // llegan las solicitudes de reserva desde Landing
+    { name: "Solicitudes En Progreso", icon: CalendarCheck2, id: "proceso" }, // Hay contacto con el cliente, pero no se ha finalizado el pago
+    { name: "Reservas Confirmadas", icon: CalendarHeart, id: "confirmacion" }, // Se ha pagado el 50% y se bloque el espacio para las fechas especificadas
+    { name: "Reservas Finalizadas/Historial", icon: CalendarCheck, id: "reservas" }, // Se ha pagado el 100% y la reserva ya pasa al historial
     { name: "Reportes", icon: BarChart3, id: "reportes" },
     { name: "Volver al lobby", icon: House  , id: "lobby" },
     { name: "Cerrar Sesion", icon: LogOut , id: "logout"} 
     
   ];
 
+  // MUESTRA LOS ICONOS DE NAVEGACIÓN EN BARRA LATERAL Y LAGUNAS FUNCIONES 
   const renderLinks = (collapsed = false, extraStyles = "") => (
     <nav className={`flex flex-col gap-1 ${extraStyles} border-t-5 border-[rgb(210,190,160)] pt-4 `}>
       {links.map((link) => {
@@ -134,7 +211,8 @@ export default function AdminLayout() {
           <p className='flex text-center text-lg pt-2.5'>Aqui puedes ver las estadisticas de tu club, asi como las solicitudes de reservas que han llegado</p>
           <p className='flex text-center text-lg pt-2.5'>Porfavor selecciona una de las opciones de la izquierda </p>
           </div>;
-
+      
+      // AQUI EMPIEZA LAS VISTAS DE SOLICITUDES 
       case "solicitudes":
         return (
           <>
@@ -154,9 +232,12 @@ export default function AdminLayout() {
             {showDetailMobile && (
               <div className="block md:hidden w-full">
                 <SolicitudesDetails
-                  reserva={selectedSolicitud}
-                  onBack={() => setShowDetailMobile(false)}
-                  onUpdate={(updatedReserva) => setSelectedSolicitud(updatedReserva)}
+                 reserva={selectedSolicitud}
+                 onBack={() => setShowDetailMobile(false)}
+                 onUpdate={() => {
+                    refreshSolicitudes();     // vuelve a cargar lista ⚡
+                    setShowDetailMobile(false); // vuelve a la lista en móvil
+                }}
                 />
               </div>
             )}
@@ -166,6 +247,7 @@ export default function AdminLayout() {
               <Wrapper4060
                 leftPanel={
                   <ListaSolicitudes
+                    reload={reloadSolicitudes}
                     onSelect={(reserva) => setSelectedSolicitud(reserva)}
                   />
                 }
@@ -173,7 +255,7 @@ export default function AdminLayout() {
                 {selectedSolicitud ? (
                   <SolicitudesDetails
                     reserva={selectedSolicitud}
-                    onUpdate={(u) => setSelectedSolicitud(u)}
+                    onUpdate={refreshSolicitudes}
                   />
                 ) : (
                   <div className="flex items-center justify-center h-full text-gray-500">
@@ -185,6 +267,7 @@ export default function AdminLayout() {
           </>
         );
 
+      // EMPIEZA EL CASO DE PROCESO O RESERVAS EN PROGRESO
       case "proceso":
       return (
         <>
@@ -204,11 +287,12 @@ export default function AdminLayout() {
           {showDetailMobile && (
             <div className="block md:hidden w-full">
               <ProcesosDetails
-                reserva={selectedProceso}
-                onBack={() => setShowDetailMobile(false)}
-                onUpdate={(updatedReserva) =>
-                  setSelectedProceso(updatedReserva)
-                }
+                 reserva={selectedProceso}
+                 onBack={() => setShowDetailMobile(false)}
+                 onUpdate={() => {
+                 refreshProcesos();     // vuelve a cargar lista ⚡
+                 setShowDetailMobile(false); // vuelve a la lista en móvil
+                }}
               />
             </div>
           )}
@@ -218,20 +302,73 @@ export default function AdminLayout() {
             <Wrapper4060
               leftPanel={
                 <ListaProcesos
+                  reload={reloadProcesos}
                   onSelect={(reserva) => setSelectedProceso(reserva)}
                 />
               }
             >
               <ProcesosDetails
                 reserva={selectedProceso}
-                onUpdate={(updatedReserva) =>
-                  setSelectedProceso(updatedReserva)
-                }
+                onUpdate={refreshProcesos}
               />
             </Wrapper4060>
           </div>
         </>
       );
+
+      case "confirmacion":
+        return (
+          <>
+            {/* 📱 Mobile: SOLO lista cuando NO se ha seleccionado detalle */}
+            {!showDetailMobile && (
+              <div className="block md:hidden w-full">
+                <ListaReservaEnPros
+                  onSelect={(reservaEnPros) => {
+                    setSelectedReservaEnPros(reservaEnPros);
+                    setShowDetailMobile(true);
+                  }}
+                />
+              </div>
+            )}
+
+            {/* 📱 Mobile: SOLO detalle */}
+            {showDetailMobile && (
+              <div className="block md:hidden w-full">
+                <ReservaEnProsDetails
+                 reservaEnPros={selectedReservaEnPros}
+                 onBack={() => setShowDetailMobile(false)}
+                 onUpdate={() => {
+                    refreshReservaEnPros();     // vuelve a cargar lista ⚡
+                    setShowDetailMobile(false); // vuelve a la lista en móvil
+                }}
+                />
+              </div>
+            )}
+
+            {/* 💻 Desktop: Vista 40/60 */}
+            <div className="hidden md:block w-full">
+              <Wrapper4060
+                leftPanel={
+                  <ListaReservaEnPros
+                    reload={reloadReservaEnPros}
+                    onSelect={(reservaEnPros) => setSelectedReservaEnPros(reservaEnPros)}
+                  />
+                }
+              >
+                {selectedReservaEnPros ? (
+                  <ReservaEnProsDetails
+                    reservaEnPros={selectedReservaEnPros}
+                    onUpdate={refreshReservaEnPros}
+                  />
+                ) : (
+                  <div className="flex items-center justify-center h-full text-gray-500">
+                    Selecciona una solicitud para ver sus detalles
+                  </div>
+                )}
+              </Wrapper4060>
+            </div>
+          </>
+        );
         
       case "reservas":
         return (
@@ -280,10 +417,10 @@ export default function AdminLayout() {
           </div>
         </>
       );
-      
-      case "reportes":
-      return <ReportesPage />;
 
+        case "reportes":
+            return <ReportesPage />;
+      
       default:
         return null;
     }
