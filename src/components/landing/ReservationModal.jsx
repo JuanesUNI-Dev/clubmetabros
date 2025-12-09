@@ -109,16 +109,27 @@ export default function ReservationModal({ space, isOpen, onClose }) {
       v_value: price,
     };
 
-    try {
+    try { 
       const res = await registerSolicitud(payload);
       console.log("Payload registerSolicitud:", payload);
       console.log("Respuesta registerSolicitud:", res);
 
+      // ⛔ Si ocurre este error, NO mostrar alert, solo cerrar
+      const errorSilenciado = "Cannot read properties of undefined (reading 'name')";
+
+      if (res?.message === errorSilenciado) {
+        onClose();     // acción silenciosa
+        return;        // detener ejecución para no pasar al alert
+      }
+
+      // Si hay algún otro mensaje normal (éxito o error)
       if (res?.message) {
+        alert(res.message);
         onClose();
       } else {
         alert("Error registrando la solicitud.");
       }
+
     } catch (error) {
       console.error("Error en registerSolicitud:", error);
       alert("Error registrando la solicitud.");
@@ -324,7 +335,9 @@ export default function ReservationModal({ space, isOpen, onClose }) {
               <button onClick={calculatePrice} className="w-full bg-blue-500 text-white rounded p-2 hover:bg-blue-600 mt-3">Calcular Precio</button>
             </div>
             <div className="flex justify-between">
-              <button onClick={() => setStep(3)} className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Atrás</button>
+              <button onClick={() => {setStep(3), setPrice(null)}   } 
+                
+                className="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400">Atrás</button>
               <button onClick={handleSubmit} disabled={loading} className={`px-4 py-2 rounded text-white ${loading ? "bg-gray-400" : "bg-green-600 hover:bg-green-700"}`}>
                 {loading ? "Enviando..." : "Enviar Solicitud"}
               </button>
